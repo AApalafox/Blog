@@ -82,8 +82,8 @@
 		</table>
 	</div> <!--end of items container-->
 
-	<?php include 'modal_edit_user.php' ?>
-	<?php include 'add_user.php'; ?>
+	<?php include 'modal_edit_student.php' ?>
+	<?php include 'add_student.php'; ?>
 
 </div> <!--end of table container-->
 

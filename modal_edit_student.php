@@ -26,29 +26,11 @@ if(isset($_POST["saveEdit"])){
 		$section = $_POST["section"];
 	}
 	
-	// escape sql char
 	$name = $_POST["name"];
 	$age = $_POST["age"];
 	$address = $_POST["address"];
 	$section = $_POST["section"];
 	
-	// // create sql
-	// $sql = "UPDATE users SET name='$name', email='$email', phone='$phone', title='$title' WHERE id=$id";
-	
-	// // save to db and check
-	// if(mysqli_query($conn, $sql)){
-	// 	// succes
-	// 	$name = $email = $phone = $title = "";
-	// 	echo '<script>localStorage.clear();</script>';
-	// 	header("Refresh:0");
-	// } else {
-	// 	echo "query error: " . mysqli_error($conn);
-	// }
-	// mysqli_close($conn);
-
-	// $sql = "UPDATE students_tbl SET name='$name', age='$age', address='$address', section='$section' WHERE id = $id";
-	// $stmt = $conn->prepare($sql);
-	// $stmt->execute();
 	try {
 		$sql = "UPDATE students_tbl SET name='$name', age='$age', address='$address', section='$section' WHERE id = $id";
 		// use exec() because no results are returned
@@ -85,22 +67,22 @@ if(isset($_POST["saveEdit"])){
 						<input type="text" id="editName" class="form-control" name="name" value="<?php echo htmlspecialchars($account["name"]); ?>">
 						<div class="form-text">Let us know your name.</div>
 					</div>
-					<div >
-						<label for="exampleInputEmail1" class="form-label">Age</label>
-						<input type="text" id="editAge" class="form-control" name="age" aria-describedby="emailHelp" value="<?php echo htmlspecialchars($account["age"]);?>">
-						<div id="emailHelp" class="form-text">How old are you?</div>
-					</div>
 					<div class="mb-3 row">
 						<div class="col">
-							<label for="exampleInputphone1" class="form-label">Address</label>
-							<input type="phone" id="editAddress" class="form-control" name="address"  value="<?php echo htmlspecialchars($account["address"]); ?>">
-							<div id="emailHelp" class="form-text">Write your addres.</div>
-						</div>
+							<label for="exampleInputEmail1" class="form-label">Age</label>
+							<input type="text" id="editAge" class="form-control" name="age" aria-describedby="emailHelp" value="<?php echo htmlspecialchars($account["age"]);?>">
+							<div id="emailHelp" class="form-text">How old are you?</div>
+						</div>	
 						<div class="col">
 							<label class="form-label">Section</label>
 							<input type="text" id="editSection" class="form-control" name="section" value="<?php echo htmlspecialchars($account["section"]); ?>">
 							<div class="form-text">What is your section.</div>
 						</div>
+					</div>
+					<div>
+						<label for="exampleInputphone1" class="form-label">Address</label>
+						<input type="phone" id="editAddress" class="form-control" name="address"  value="<?php echo htmlspecialchars($account["address"]); ?>">
+						<div id="emailHelp" class="form-text">Write your addres.</div>
 					</div>
 				</div>
 				<div class="modal-footer">
