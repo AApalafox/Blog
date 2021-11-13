@@ -53,7 +53,7 @@ if(isset($_POST["register"])){
 		$password = mysqli_real_escape_string($conn, $_POST["password"]);
 		
 		// create sql
-		$sql = "INSERT INTO users_original(firstname,lastname,email,password) VALUES('$firstname','$lastname','$email','$password')";
+		$sql = "INSERT INTO users_admin (firstname,lastname,email,password) VALUES('$firstname','$lastname','$email','$password')";
 		
 		// save to db and check
 		if(mysqli_query($conn, $sql)){

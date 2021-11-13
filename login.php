@@ -9,56 +9,56 @@
 
 	if(isset($_POST["login"])){
 
-	// Check email
-	if(empty($_POST["email"])){
-	  $errors["email"] = "An email is required";
-	} else {
-	  $email = $_POST["email"];
-	}
-
-	// Check password
-	if(empty($_POST["password"])){
-	  $errors["password"] = "A password is required";
-	} else {
-	  $password = $_POST["password"];
-	}
-
-	if(array_filter($errors)){
-		// display label errors
-	} else {
-		// escape sql char
-		$email = mysqli_real_escape_string($conn, $_POST["email"]);
-		$password = mysqli_real_escape_string($conn, $_POST["password"]);
-
-		// create sql
-		$sql = "SELECT firstname, lastname FROM users_original WHERE email='$email' and password='$password';";
-
-		// make query and get result
-		$result = mysqli_query($conn,$sql);
-
-		// fetch result and make array
-		$account = mysqli_fetch_all($result,MYSQLI_ASSOC);
-		
-		// get rows available in result
-		$count = mysqli_num_rows($result);
-		
-		// If result matched $myusername and $mypassword, table row must be 1 row
-		if($count == 1) {
-
-			// save firstname and lastname
-			$_SESSION["firstname"] = $account[0]["firstname"];
-			$_SESSION["lastname"] = $account[0]["lastname"];
-
-			// close connection
-			mysqli_close($conn);
-
-			header("Location: welcome.php");
-		}else {
-			$errors["login"] = "Your email or password is invalid";
+		// Check email
+		if(empty($_POST["email"])){
+		$errors["email"] = "An email is required";
+		} else {
+		$email = $_POST["email"];
 		}
 
-	} // end of if arrray_filter
-  }
+		// Check password
+		if(empty($_POST["password"])){
+		$errors["password"] = "A password is required";
+		} else {
+		$password = $_POST["password"];
+		}
+
+		if(array_filter($errors)){
+			// display label errors
+		} else {
+			// escape sql char
+			$email = mysqli_real_escape_string($conn, $_POST["email"]);
+			$password = mysqli_real_escape_string($conn, $_POST["password"]);
+
+			// create sql
+			$sql = "SELECT firstname, lastname FROM users_admin WHERE email='$email' and password='$password';";
+
+			// make query and get result
+			$result = mysqli_query($conn,$sql);
+
+			// fetch result and make array
+			$account = mysqli_fetch_all($result,MYSQLI_ASSOC);
+			
+			// get rows available in result
+			$count = mysqli_num_rows($result);
+			
+			// If result matched $myusername and $mypassword, table row must be 1 row
+			if($count == 1) {
+
+				// save firstname and lastname
+				$_SESSION["firstname"] = $account[0]["firstname"];
+				$_SESSION["lastname"] = $account[0]["lastname"];
+
+				// close connection
+				mysqli_close($conn);
+
+				header("Location: welcome.php");
+			}else {
+				$errors["login"] = "Your email or password is invalid";
+			}
+
+		} // end of if arrray_filter
+	} // end of isset
 ?>
 
 <!DOCTYPE html>
