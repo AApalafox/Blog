@@ -4,7 +4,7 @@ include 'config/db_connect_pdo.php';
 try {
 	$id = intval($_GET['q']);
 	// sql to delete a record
-	$sql = "DELETE FROM users WHERE id='$id'";
+	$sql = "DELETE FROM students_tbl WHERE id='$id'";
 
 	// use exec() because no results are returned
 	$conn->exec($sql);

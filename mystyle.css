@@ -121,11 +121,14 @@ a:hover {
 .list-group-item:hover {
 	font-weight: bold;
 	outline: 2px solid gray;
-	
 }
 
 .btn {
 	margin: 5px 2px;
+}
+
+.btn-tooltip {
+	position: absolute;
 }
 
 .thumb-info {

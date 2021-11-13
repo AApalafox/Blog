@@ -7,7 +7,7 @@
 
 	include 'config/db_connect_pdo.php';
 	try {
-		$stmt = $conn->prepare("SELECT id,name,email,phone,title,created_at FROM users");
+		$stmt = $conn->prepare("SELECT id,name,age,address,section FROM students_tbl");
 		$stmt->execute();
 	  
 		// set the resulting array to associative
@@ -34,7 +34,7 @@
 	</div>
 </div>
 <div class=" mb-5 shadow min-height p-4 mx-auto">
-	<h2 class=" mini-title text-center">Table Records</h2>
+	<h2 class=" mini-title text-center">Student Records</h2>
 	<div class="m-5 table-responsive">
 		<table class="table table-hover mb-3">
 			<thead>
@@ -42,10 +42,9 @@
 				<tr>
 					<th scope="col">ID</th>
 					<th scope="col">Name</th>
-					<th scope="col">Email</th>
-					<th scope="col">Phone</th>
-					<th scope="col">Title</th>
-					<th scope="col">Created</th>
+					<th scope="col">Age</th>
+					<th scope="col">Address</th>
+					<th scope="col">Section</th>
 					<th scope="col">Actions</th>
 				</tr>
 			</thead>
@@ -54,26 +53,24 @@
 					<tr  class="align-middle">
 						<th scope="row"><?php echo htmlspecialchars($account["id"]); ?></th>
 						<td><?php echo htmlspecialchars($account["name"]); ?></td>
-						<td><?php echo htmlspecialchars($account["email"]); ?></td>
-						<td><?php echo htmlspecialchars($account["phone"]); ?></td>
-						<td><?php echo htmlspecialchars($account["title"]); ?></td>
-						<td><?php echo htmlspecialchars($account["created_at"]); ?></td>
+						<td><?php echo htmlspecialchars($account["age"]); ?></td>
+						<td><?php echo htmlspecialchars($account["address"]); ?></td>
+						<td><?php echo htmlspecialchars($account["section"]); ?></td>
 						<td>
-							<span data-bs-toggle="tooltip" data-bs-placement="top" title="Edit User">
+							<span data-bs-toggle="tooltip" data-bs-placement="top" title="Edit Student">
 								<button type="button" onclick='editUser(
 									{
 										id: "<?php echo $account["id"];?>",
-										email: "<?php echo $account["email"];?>",
 										name: "<?php echo $account["name"];?>",
-										phone: "<?php echo $account["phone"];?>",
-										title: "<?php echo $account["title"];?>"
+										age: "<?php echo $account["age"];?>",
+										address: "<?php echo $account["address"];?>",
+										section: "<?php echo $account["section"];?>"
 									})' class="btn btn-outline-success " data-bs-toggle="modal" data-bs-target="#editModal">
 									<i class="fas fa-edit"></i>
 								</button>
 							</span>
-							
-							<span data-bs-toggle="tooltip" data-bs-placement="top" title="Delete User">
-								<button type="button" onclick="deleteUser(<?php echo $account['id'];?>)" class="btn btn-outline-danger">
+							<span data-bs-toggle="tooltip" data-bs-placement="top" title="Delete Student">
+								<button type="button" onclick="deleteStudent(<?php echo $account['id'];?>)" class="btn btn-outline-danger btn-tooltip">
 									<i class="fas fa-trash-alt"></i>
 								</button>
 							</span>
@@ -95,29 +92,23 @@
 </html>
 
 <script>
-	var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'));
-	var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
-		return new bootstrap.Tooltip(tooltipTriggerEl)
-	});
-
-	function deleteUser(id){
+	function deleteStudent(id){
 		var xmlhttp = new XMLHttpRequest();
 		xmlhttp.onreadystatechange = function() {
 			if (this.readyState == 4 && this.status == 200) {
 				location.reload();
-				alert('User deleted');
+				alert('Student record deleted');
 			}
 		};
-		xmlhttp.open("GET","delete_user.php?q="+id,true);
+		xmlhttp.open("GET","delete_student.php?q="+id,true);
 		xmlhttp.send();
 	}
 	function editUser(data){
 		$("#editID").val(data["id"]);
 		$("#editName").val(data["name"]);
-		$("#editEmail").val(data["email"]);
-		$("#editPhone").val(data["phone"]);
-		$("#editTitle").val(data["title"]);
-		console.log(id);
+		$("#editAge").val(data["age"]);
+		$("#editAddress").val(data["address"]);
+		$("#editSection").val(data["section"]);
 	}
 </script>
 <? ob_flush(); ?>
